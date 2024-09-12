@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".MainActivity">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#673AB7"> <!-- Встановіть потрібний колір фону тут -->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Розв'язування рівнянь чисельними методами"
+            android:textSize="18sp"
+            android:textColor="#FFFFFF" /> <!-- Встановіть колір тексту тут -->
+
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Нижня межа:"
+        android:textSize="18sp"/>
+
+    <EditText
+        android:id="@+id/lowerBoundEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Нижня межа"
+        android:inputType="number|numberDecimal|numberSigned"
+        android:minWidth="200dp"
+        android:minHeight="48dp"/>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Верхня межа:"
+        android:textSize="18sp"/>
+
+    <EditText
+        android:id="@+id/upperBoundEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Верхня межа"
+        android:inputType="number|numberDecimal|numberSigned"
+        android:minWidth="200dp"
+        android:minHeight="48dp"/>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Коефіцієнти мночлена. Приклад введення: 1, 0, 3. Многочлен: x^2+3:"
+        android:textSize="18sp"/>
+
+    <EditText
+        android:id="@+id/coefficientsEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Коефіцієнти многочлена (через кому)"
+        android:inputType="text"
+        android:minWidth="200dp"
+        android:minHeight="48dp"/>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Точність:"
+        android:textSize="18sp"/>
+
+    <EditText
+        android:id="@+id/epsilonEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Точність"
+        android:inputType="numberDecimal"
+        android:minWidth="200dp"
+        android:minHeight="48dp" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Метод розв'язання:"
+        android:textSize="18sp"/>
+
+    <RadioGroup
+        android:id="@+id/methodRadioGroup"
+        android:layout_width="239dp"
+        android:layout_height="162dp" >
+
+        <RadioButton
+            android:id="@+id/radioButton1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Методі ділення навпіл" />
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Метод Ньютона" />
+
+        <RadioButton
+            android:id="@+id/radioButton3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Модифікований метод Ньютона" />
+    </RadioGroup>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingTop="16dp">
+
+        <Button
+            android:id="@+id/resultButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="solveEquation"
+            android:text="Розв'язати" />
+
+        <Button
+            android:id="@+id/button_open_graph"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Графік"
+            android:onClick="openGraphActivity"/>
+
+        <Button
+            android:id="@+id/Author"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Автор"
+            android:onClick="openAuthorActivity"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/resultTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="20sp"
+        android:minWidth="200dp"
+        android:minHeight="48dp"/>
+    <TextView
+        android:id="@+id/iterationsTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="20sp"
+        android:minWidth="200dp"
+        android:minHeight="48dp"/>
+    <TextView
+        android:id="@+id/precisionTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="20sp"
+        android:minWidth="200dp"
+        android:minHeight="48dp"/>
+
+
+</LinearLayout>
