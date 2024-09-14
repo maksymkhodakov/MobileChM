@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
     private int iterationCount1 = 0;
     private int iterationCount2 = 0;
     private int iterationCount3 = 0;
-    private String textDivision = "Перше число - значення аргументу, друге - значення функції. \n Division in half method:\n";
     public static final String FILE_NAME = "file.txt";
 
 
@@ -63,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
                 coefficients[i] = Double.parseDouble(coefficientsArray[i].trim());
             }
 
+            // табуляція та запис у файл
+            tabulateFunction(lowerBound, upperBound, coefficients);
+
             double root = 0;
             // Визначте, який RadioButton був обраний
             RadioButton selectedRadioButton = findViewById(methodRadioGroup.getCheckedRadioButtonId());
@@ -70,8 +72,6 @@ public class MainActivity extends AppCompatActivity {
             // Викликаємо відповідний метод в залежності від обраного RadioButton
             if (selectedRadioButton.getId() == R.id.radioButton1) {
                 root = divisionInHalf(lowerBound, upperBound, epsilon, coefficients);
-                save(textDivision);
-                textDivision = "Перше число - значення аргументу, друге - значення функції. \n Division in half method:\n";
                 resultTextView.setText("Результат (Метод ділення навпіл): " + root);
                 iterationsTextView.setText("Кількість ітерацій: " + iterationCount1);
                 iterationCount1 = 0;
@@ -90,6 +90,17 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             resultTextView.setText("Виникла помилка: " + e.getMessage());
         }
+    }
+
+    // табулюємо функція
+    public void tabulateFunction(double lowerBound, double upperBound, double[] coefficients) {
+        double stepSize = (upperBound - lowerBound) / 100; // Define step size
+        StringBuilder data = new StringBuilder("Аргумент\tФункція\n");
+        for (double x = lowerBound; x <= upperBound; x += stepSize) {
+            double f_x = evaluatePolynomial(coefficients, x);
+            data.append(x).append("\t").append(f_x).append("\n");
+        }
+        save(data.toString());
     }
 
 
@@ -116,8 +127,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         double x_new = (a_new + b_new) / 2;
-        String data = x + "\t" + f_x + "\n";
-        textDivision += data;
         if (Math.abs(x_new - x) <= 2 * epsilon) {
             return (x_new + x) / 2;
         } else {
@@ -125,23 +134,19 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public double newtonMethod(double lowerBound, double upperBound, double epsilon, double[] coefficients) throws IOException {
+    public double newtonMethod(double lowerBound, double upperBound, double epsilon, double[] coefficients) {
         // Початкове наближення в середині інтервалу
         double x = (lowerBound + upperBound) / 2;
         double f_x = evaluatePolynomial(coefficients, x);
         double f_prime_x = evaluatePolynomialDerivative(coefficients, x);
         double x_prew = 0;
-        StringBuilder text = new StringBuilder("Перше число - значення аргументу, друге - значення функції. \n Newton method:\n" + x + f_x + "\n");
         while (Math.abs(x - x_prew) > epsilon) {
             iterationCount2++;
             x_prew = x;
             x = x - f_x / f_prime_x;
             f_x = evaluatePolynomial(coefficients, x);
-            String data = x + "\t" + f_x + "\n";
-            text.append(data);
             f_prime_x = evaluatePolynomialDerivative(coefficients, x);
         }
-        save(text.toString());
         return x;
     }
 
@@ -150,18 +155,12 @@ public class MainActivity extends AppCompatActivity {
         double f_x = evaluatePolynomial(coefficients, x);
         double f_prime_x_0 = evaluatePolynomialDerivative(coefficients, x);
         double x_prew = 0;
-        StringBuilder text = new StringBuilder("Перше число - значення аргументу, друге - значення функції. \n Modified Newton method:\n" + x + f_x + "\n");
         while (Math.abs(x - x_prew) > epsilon) {
             iterationCount3++;
             x_prew = x;
             x = x - f_x / f_prime_x_0;
             f_x = evaluatePolynomial(coefficients, x);
-            String data = x + "\t" + f_x + "\n";
-            text.append(data);
         }
-
-        save(text.toString());
-
         return x;
     }
 
