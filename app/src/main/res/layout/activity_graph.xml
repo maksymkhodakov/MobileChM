@@ -32,5 +32,6 @@
         android:layout_width="347dp"
         android:layout_height="wrap_content"
         android:onClick="openMainPage"
-        android:text="Повернутись" />
+        android:backgroundTint="#0000FF"
+        android:text="Назад до головної" />
 </LinearLayout>

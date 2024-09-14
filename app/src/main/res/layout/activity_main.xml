@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Розв'язування рівнянь чисельними методами"
+            android:text="Розв'язування рівнянь ЧМ"
             android:textSize="18sp"
             android:textColor="#FFFFFF" /> <!-- Встановіть колір тексту тут -->
 
@@ -59,7 +59,7 @@
         android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Коефіцієнти мночлена. Приклад введення: 1, 0, 3. Многочлен: x^2+3:"
+        android:text="Коефіцієнти мночлена. Приклад введення: 1,1,2. Многочлен: x^2+x+2:"
         android:textSize="18sp"/>
 
     <EditText
@@ -132,13 +132,15 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="solveEquation"
-            android:text="Розв'язати" />
+            android:backgroundTint="#0000FF"
+            android:text="Рішення" />
 
         <Button
             android:id="@+id/button_open_graph"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="#0000FF"
             android:text="Графік"
             android:onClick="openGraphActivity"/>
 
@@ -147,6 +149,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="#0000FF"
             android:text="Автор"
             android:onClick="openAuthorActivity"/>
     </LinearLayout>

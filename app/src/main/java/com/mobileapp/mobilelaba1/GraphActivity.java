@@ -25,22 +25,37 @@ public class GraphActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph);
-        List<Point> points = getPoints();
 
-        Graph graph = new Graph.Builder()
-                .setWorldCoordinates(-5, 10, -10, 10)
-                .addLineGraph(points, Color.GREEN)
-                .setXTicks(new double[] {-2, -1, 1, 2, 3, 4, 5, 6, 7})
-                .setYTicks(new double[] { -9, -7, -5, -3, 0, 3, 5, 8, 10})
-                .build();
+        List<Point> points = getPoints();  // Load the points from the file
 
-        GraphView graphView = findViewById(R.id.graph_view);
-        graphView.setGraph(graph);
-        setTitle("Empty Graph");
-        TextView textView = findViewById(R.id.graph_view_label);
-        textView.setText("Графік, побудований на основі табуляції функції");
-        String s = load();
+        if (points != null && !points.isEmpty()) {
+            // Create the graph if points are available
+            Graph graph = new Graph.Builder()
+                    .setWorldCoordinates(-5, 10, -10, 10)
+                    .addLineGraph(points, Color.GREEN)
+                    .setXTicks(new double[] {-2, -1, 1, 2, 3, 4, 5, 6, 7})
+                    .setYTicks(new double[] { -9, -7, -5, -3, 0, 3, 5, 8, 10})
+                    .build();
+
+            GraphView graphView = findViewById(R.id.graph_view);
+            if (graphView != null) {
+                graphView.setGraph(graph);
+            }
+            setTitle("Graph Display");
+            TextView textView = findViewById(R.id.graph_view_label);
+            textView.setText("Графік по функії");
+        } else {
+            // Handle the case when there are no points
+            setTitle("No Data");
+            TextView textView = findViewById(R.id.graph_view_label);
+            textView.setText("Нема даних");
+
+            // Optionally, hide the GraphView if there's no graph to display
+            GraphView graphView = findViewById(R.id.graph_view);
+            graphView.setVisibility(View.GONE);
+        }
     }
+
 
     public List<Point> getPoints() {
         String input = load();
